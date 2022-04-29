@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import ShareCompleteButton from "./ShareCompleteButton";
 import Thumbnails from "./Thumbnails";
 import { InputArea, InputAreas } from "./InputAreas";
 
@@ -12,13 +11,8 @@ const ShareBox = () => {
   return (
     <div style={style.shareBox}>
       <div style={style.shareTitle}>공유하기</div>
-      <hr />
+      <div style={{margin:'0 auto',height:'2px',width:'90%',backgroundColor:'white'}}></div>
       <Thumbnails></Thumbnails>
-      <div style={style.shareSubTitle}>&nbsp;&nbsp;유튜브 링크: </div>
-      <InputArea></InputArea>
-      <div style={style.shareSubTitle}>&nbsp;&nbsp;태그: </div>
-      <InputAreas></InputAreas>
-      <ShareCompleteButton></ShareCompleteButton>
     </div>
   );
 };
@@ -32,12 +26,13 @@ const style = {
     top: "20vh",
     left: "25vw",
     width: "50vw",
-    height: "60vh",
-    backgroundColor: "white",
+    height: "65vh",
+    backgroundColor: "rgb(230,230,230)",
   },
   shareTitle: {
     textAlign: "center",
     margin: "10px",
     fontWeight: "bold",
+    color:'gray',
   },
 };

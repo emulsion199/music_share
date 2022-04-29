@@ -15,7 +15,8 @@ return {
 
 const initialState={
     sharing:0,
-    data:['a']
+    data:[]//{'url':[],'name':'','desc':''}],
+
 }
 export default function reducer(state = initialState, action) {
     switch (action.type) {
@@ -27,7 +28,7 @@ export default function reducer(state = initialState, action) {
     case 'AddData':
     return {
         ...state,
-        data:state.data.concat(action.value)
+        data:[...state.data,action.value]
     }
  
     default:

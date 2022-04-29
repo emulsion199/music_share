@@ -16,17 +16,21 @@ const mapDispatchToProps = {
     Sharing
 };
 
-
+const pages=[1]
 
 const MainComponent=()=>
 {
     const database=store.getState()['data']
+
     return(
         <div style={style.background}>
             
             {store.getState()['sharing']?<div className='Upper'><ShareComponent></ShareComponent></div>:null}
-            {database.map(()=>{return(<Box></Box>)})}
+            {database.map((idx)=>{return(<Box url={idx.url} name={idx.name} desc={idx.desc}></Box>)})}
             <ShareButton></ShareButton>
+            <div style={{width:'100px',margin:'0 auto',textAlign:'center',display:'grid', gridTemplateColumns:`repeat(${pages.length},1fr)`}}>
+                {pages.map((p)=>{return(<div>{p}</div>)})}
+            </div>
         </div>
     )
 }
