@@ -38,19 +38,20 @@ const Thumbnails = () => {
   {
  
     const field=parsing.exec(iu.current.value)
-    setrealurl([...realurl,au])
-    setau('')
+    
+    
     if(field!=null)
     {
       const part=field[0].slice(2)
       const newurl=`https://img.youtube.com/vi/${part}/2.jpg`
       seturl([...url,newurl])
-      
+      setrealurl([...realurl,au])
       slider.current.slickGoTo(url.length);
     }
     else{
       alert('제대로된 유튜브 url을 입력해주세요!')
     }
+    setau('')
   }
   return (
     <div style={{ margin: "10px" }}>
