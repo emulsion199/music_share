@@ -53,6 +53,7 @@ const Thumbnails = () => {
     }
     setau('')
   }
+  const [hover,sethover]=useState(0)
   return (
     <div style={{ margin: "10px" }}>
 
@@ -78,7 +79,8 @@ const Thumbnails = () => {
           <input maxLength={100}  style={{textIndent:'10px',margin:'0 auto',height:'30px',borderRadius:'10px',width:'100%',border:'none'}} onChange={(e)=>{setdesc(e.target.value)}}  value={desc} placeholder='내 플레이리스트를 표현할 간단한 소개 말을 적어주세요!'></input>
           <div
           
-      style={style.shareCompleteButton}
+      style={hover?style.hovershareCompleteButton:style.shareCompleteButton}
+      onMouseOver={()=>{sethover(1)}} onMouseOut={()=>{sethover(0)}} 
       onClick={() => {
         if(realurl.length==0)
         {
@@ -94,7 +96,7 @@ const Thumbnails = () => {
         }
       }}
     >
-      <div style={style.shareCompleteButtonText}>나도 공유하기</div>
+      <div style={style.shareCompleteButtonText}>공유하기</div>
     </div>
     </div>
   );
@@ -123,10 +125,22 @@ const style = {
     borderRadius: "15px",
   },
   shareCompleteButton: {
+    transition:' all ease 0.3s',
     position:'absolute',
-    width: "95%",
+    width: "97%",
     height: "50px",
     backgroundColor: 'rgb(0,162,255)',
+    borderRadius: "100px",
+    display: "flex",
+    alignItems: "center",
+    bottom:'10px',
+  },
+  hovershareCompleteButton: {
+    transition:' all ease 0.3s',
+    position:'absolute',
+    width: "97%",
+    height: "50px",
+    backgroundColor: 'rgba(0,190,255)',
     borderRadius: "100px",
     display: "flex",
     alignItems: "center",

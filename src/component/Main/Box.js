@@ -26,17 +26,18 @@ const Box=(props)=>
       const newurl=`https://www.youtube.com/embed/${part}`
       return newurl
   }
+  const blackbox=useRef()
   const movebox=(e)=>
   {
-      blackbox.current.style.left=e.clientX+'px'
-      blackbox.current.style.top=e.clientY+10+'px'
+      blackbox.current.style.left=e.clientX+20+'px'
+      blackbox.current.style.top=e.clientY+20+'px'
   }
-  const blackbox=useRef()
+  
  
   
     const [over,setOver]=useState(0)
     useEffect(()=>{
-        if(over==0){
+        if(over==1){
         document.addEventListener('mousemove',movebox)
     }
 else{
@@ -48,9 +49,9 @@ else{
             <div style={{margin:'10px',backgroundColor:'rgb(240,240,240)',height:'200px', width:'50vw', margin:'0 auto', borderRadius:'50px'}}>
             
             <div style={{paddingTop:'20px',width:'90%',margin:'0 auto'}}>
-            <div style={{display:'inline', color:'gray', marginBottom:'10px'}}>{nick}님의 플레이리스트</div>
-            <div onMouseOver={()=>{setOver(1)}} onMouseOut={()=>{setOver(0)}} style={{display:'inline', color:'rgb(0,162,255)', userSelect:'none'}}>  정보</div>
-            <div ref={blackbox} style={over?{maxWidth:'300px',border:'1px white solid', color:'white',visibility:'visible',zIndex:'2', position:'absolute', backgroundColor:'rgba(0,0,0,0.5)',width:'auto',height:'auto',padding:'10px'}:{visibility:'hidden', position:'absolute', backgroundColor:'rgba(0,0,0,0.5)',width:'50px',height:'50px'}}>{desc}</div>
+            <div style={{display:'inline', color:'gray', marginBottom:'10px'}}>{nick}님의 플레이리스트🎶</div>
+            <div onMouseOver={()=>{setOver(1)}} onMouseOut={()=>{setOver(0)}} style={{display:'inline', color:'rgb(0,162,255)', userSelect:'none'}}>      정보</div>
+            <div ref={blackbox} style={over?{wordBreak:'break-word', maxWidth:'300px',border:'1px white solid', color:'white',visibility:'visible',zIndex:'2', position:'absolute', backgroundColor:'rgba(0,0,0,0.5)',width:'auto',height:'auto',padding:'10px'}:{visibility:'hidden', position:'absolute', backgroundColor:'rgba(0,0,0,0.5)',width:'50px',height:'50px'}}>{desc}</div>
             <hr/>
             <Slider {...settings}>
                 {utubeUrl.map((idx)=>{return(<iframe

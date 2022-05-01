@@ -12,6 +12,12 @@ return {
     value
 }
 }
+export function SetData(value) {
+  return {
+      type: 'SetData',
+      value
+  }
+  }
 
 const initialState={
     sharing:0,
@@ -26,9 +32,15 @@ export default function reducer(state = initialState, action) {
           sharing:action.value,
       }
     case 'AddData':
+    const k=[action.value].concat(state.data)
     return {
         ...state,
-        data:[...state.data,action.value]
+        data:k
+    }
+    case 'SetData':
+    return {
+        ...state,
+        data:[action.value]
     }
  
     default:
