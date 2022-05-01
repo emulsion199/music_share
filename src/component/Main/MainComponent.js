@@ -19,8 +19,10 @@ const mapDispatchToProps = {
 
 const MainComponent=()=>
 {
+    const totaldb=[]
     const [page,setPage]=useState(0)
     const db=store.getState()['data']
+
     const database=db.slice(page*3,(page+1)*3)
     const [lhover,setlhover]=useState(0)
     const [rhover,setrhover]=useState(0)

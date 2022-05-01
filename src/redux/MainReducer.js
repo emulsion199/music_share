@@ -21,7 +21,7 @@ export function SetData(value) {
 
 const initialState={
     sharing:0,
-    data:[]//{'url':[],'name':'','desc':''}],
+    data:[{'url':[],'name':'','desc':''}]//{'url':[],'name':'','desc':''}],
 
 }
 export default function reducer(state = initialState, action) {
@@ -40,7 +40,7 @@ export default function reducer(state = initialState, action) {
     case 'SetData':
     return {
         ...state,
-        data:[action.value]
+        data:action.value
     }
  
     default:

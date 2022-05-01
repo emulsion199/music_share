@@ -1,10 +1,11 @@
 import Thumbnail from "../Thumbnail";
 import Slider from 'react-slick'
 import {useState,useRef} from 'react'
-
+import { db} from "../../../firebase";
+import { collection, updateDoc,doc,getDocs } from "firebase/firestore";
 //redux//
 import { connect } from "react-redux";
-import { AddData, Sharing } from "../../../redux/MainReducer";
+import { AddData, Sharing,SetData } from "../../../redux/MainReducer";
 import store from "../../../index";
 
 const mapStateToProps = (state) => ({
@@ -14,9 +15,43 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   Sharing,
   AddData,
+  SetData,
 };
 
 const Thumbnails = () => {
+
+    const [firestate,setfirestate]=useState(0)
+    const realDoc=async() =>{
+      // db 뒤에 "techInfo"는 정보를 가져올 컬렉션 이름이다.
+        const query = await getDocs(collection(db, "notes")); 
+        query.forEach( async (docs) => {
+          const tempdata=docs.data()['data']
+          console.log(tempdata)
+          var urls=""
+            for(var i=0;i<realurl.length;i++)
+            {
+              urls+=realurl[i]+','
+            }
+          const docRef = doc(db, "notes", "1");
+          const k=[{'url':urls.slice(0,urls.length-1),'desc':desc,'name':nick}].concat(tempdata)
+          if(k!=undefined)
+          {
+            await updateDoc(docRef, {data:k})
+            const query2 = await getDocs(collection(db, "notes")); 
+        query2.forEach((doc) => {
+          const FireData=doc.data()['data']
+          for(var i=0;i<FireData.length;i++)
+          {
+            FireData[i]['url']=FireData[i]['url'].split(',')
+          }
+          store.dispatch(SetData(FireData))
+        ;
+        })
+          }
+          ;
+        })
+        
+      }
   
   const parsing= /v=[^&]+/
   const iu=useRef()
@@ -91,7 +126,9 @@ const Thumbnails = () => {
           alert('닉네임을 설정해주세요!')
         }
         else{
-        store.dispatch(AddData({'url':realurl, 'name':nick,'desc':desc}));
+          
+          realDoc()
+          
         store.dispatch(Sharing(0));
         }
       }}
